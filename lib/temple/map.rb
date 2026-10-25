@@ -32,7 +32,7 @@ module Temple
 
     def to_hash
       result = {}
-      @map.each {|h| result.update(h.to_hash) {|_key, value, _| value } }
+      @map.each {|h| result.update(h.to_hash) {|_key, existing, _| existing } }
       result
     end
   end
