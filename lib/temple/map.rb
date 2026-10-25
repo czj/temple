@@ -115,18 +115,12 @@ module Temple
     end
 
     def valid_key?(key)
-      cached_valid_keys.include?(key)
-    end
-
-    private
-
-    def cached_valid_keys
       generation = OptionMap.generation
       unless @cached_valid_keys_generation == generation
-        @cached_valid_keys = valid_keys.each_with_object({}) {|key, keys| keys[key] = true }
+        @cached_valid_keys = Hash[valid_keys.map {|k| [k, true] }]
         @cached_valid_keys_generation = generation
       end
-      @cached_valid_keys
+      @cached_valid_keys.include?(key)
     end
   end
 end
