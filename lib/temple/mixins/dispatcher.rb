@@ -4,9 +4,7 @@ module Temple
     # @api private
     module CoreDispatcher
       def on_multi(*exps)
-        multi = [:multi]
-        exps.each {|exp| multi << compile(exp) }
-        multi
+        exps.map! {|exp| compile(exp) }.unshift(:multi)
       end
 
       def on_capture(name, exp)
