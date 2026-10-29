@@ -31,6 +31,10 @@ module Temple
         @src
       end
 
+      def self.metadata
+        @metadata ||= { mime_type: options[:mime_type] }
+      end
+
       def self.register_as(*names)
         ::Tilt.register(self, *names.map(&:to_s))
       end
