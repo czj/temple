@@ -12,7 +12,8 @@ on:
     - cron: "00 15 * * *"
 jobs:
   test:
-    runs-on: ubuntu-latest
+    # ruby/setup-ruby has no Ruby < 3.2 for ubuntu-26.04, which ubuntu-latest now points to
+    runs-on: ${{ contains(fromJSON('["2.5", "2.6", "2.7", "3.0", "3.1"]'), matrix.ruby) && 'ubuntu-24.04' || 'ubuntu-latest' }}
     strategy:
       fail-fast: false
       matrix:
